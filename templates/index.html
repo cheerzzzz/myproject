@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <title>Hello Page</title>
 </head>
 <body>
-    <h1>Welcome to my Flask App</h1>
+    <h1>Hello, {{ name }}!</h1>
+
+    <h2>Fruit List:</h2>
+    <ul>
+      {% for fruit in fruits %}
+          {% if fruit == "Banana" %}
+              <li>🍌 {{ fruit }} (My Favorite!)</li>
+          {% else %}
+              <li>{{ fruit }}</li>
+          {% endif %}
+      {% endfor %}
+    </ul>
 </body>
 </html>
