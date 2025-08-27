@@ -8,13 +8,11 @@
 
     <h2>Fruit List:</h2>
     <ul>
-      {% for fruit in fruits %}
-          {% if fruit == "Banana" %}
-              <li>🍌 {{ fruit }} (My Favorite!)</li>
-          {% else %}
-              <li>{{ fruit }}</li>
-          {% endif %}
-      {% endfor %}
+      {% if user.role == "admin" %}
+        <a href="/admin">管理者ページへ</a>
+      {% else %}
+        <a href="/mypage">マイページへ</a>
+      {% endif %}
     </ul>
 </body>
 </html>
