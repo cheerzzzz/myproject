@@ -3,18 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}My Flask App{% endblock %}</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;
-        }
-        header, footer {
-            padding: 10px;
-            background: #f5f3ef;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <header>
