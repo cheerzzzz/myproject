@@ -3,15 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}My Flask App{% endblock %}</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        header, footer {
+            padding: 10px;
+            background: #f5f3ef;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <header></header>
+    <header>
+    </header>
 
     <main>
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
 
-    <footer></footer>
+    <footer>
+    </footer>
 </body>
 </html>
