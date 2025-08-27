@@ -2,15 +2,19 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route("/<name>")
-def home(name):
-    # 仮のユーザーデータ（本当はDBやログイン情報から取得する）
+@app.route("/")
+def home():
     user = {
-        "name": name,
-        "role": "admin"   # ここを "user" に変えるとマイページへリンクが出る
+        "name": "Guest",
+        "role": "admin"
     }
-    fruits = ["Apple", "Banana", "Orange"]
-    return render_template("index.html", name=name, fruits=fruits, user=user)
+    # 仮のメモリスト（本来はDBやフォームから取得する）
+    memos = [
+        "Buy milk",
+        "Finish Flask project",
+        "Call Alice"
+    ]
+    return render_template("index.html", user=user, memos=memos)
 
 if __name__ == "__main__":
     app.run(debug=True)
