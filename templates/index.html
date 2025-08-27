@@ -1,26 +1,73 @@
 {% extends "base.html" %}
 
-{% block title %}Hello Page{% endblock %}
-
 {% block content %}
-    <h2>Hello, {{ name }}!</h2>
+<style>
 
-    <h3>Memo List:</h3>
-    <ul>
-        {% if memos %}
-            {% for memo in memos %}
-                <li>{{ memo }}</li>
-            {% endfor %}
-        {% else %}
-            <li>メモが登録されていません</li>
-        {% endif %}
-    </ul>
+    .top-section {
+        height: 30vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f5f3ef;
+        text-align: center; /* 横方向にセンター */
+    }
 
-    {% if user.role == "admin" %}
-        <a href="/admin">管理者ページへ</a>
-    {% else %}
-        <a href="/mypage">マイページへ</a>
-    {% endif %}
+    .title {
+        font-size: 3rem;
+        line-height: 1.2;
+    }
 
+
+    .top-section h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+
+    .bottom-section {
+        height: 70vh;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 横4つ */
+        gap: 20px;
+        overflow-y: auto;
+        background: #f5f3ef;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        overflow: hidden;
+        height: 450px;
+    }
+
+    .card img {
+        width: 100%;
+        object-fit: cover; /* 画像の高さを変えたい場合に便利 */
+    }
+
+    .card p {
+        padding: 10px;
+        font-size: 14px;
+    }
+</style>
+
+<div class="top-section">
+    <h1 class="title">the <br> Memo App</h1>
+</div>
+
+<div class="bottom-section">
+  {% if memos %}
+    {% for memo in memos %}
+      <div class="card">
+        <img src="{{ memo.image }}" alt="memo image" style="height: {{ memo.height }}px; object-fit: cover;">
+        <p>{{ memo.text }}</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>メモが登録されていません</p>
+  {% endif %}
+</div>
 {% endblock %}
 
