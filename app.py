@@ -62,14 +62,5 @@ def register():
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-        # サンプルデータ（最初だけ）
-        if not Memo.query.first():
-            sample_memos = [
-                Memo(title="Buy milk", content="Go to store", image="/static/uploads/sample1.jpg"),
-                Memo(title="Finish Project", content="Work on Flask app", image="/static/uploads/sample2.jpg"),
-            ]
-            db.session.add_all(sample_memos)
-            db.session.commit()
-
     app.run(host="0.0.0.0", port=5001, debug=True)
 
