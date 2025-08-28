@@ -112,6 +112,10 @@ def signup():
         new_user = User(username=username, password=hashed_pw)
         db.session.add(new_user)
         db.session.commit()
+
+        # 👇 登録後にログインしてしまう
+        login_user(new_user)
+
         return redirect(url_for("home"))
     return render_template("signup.html")
 
