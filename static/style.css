@@ -21,8 +21,7 @@
     }
 
     .bottom-section {
-      height: 80vh;
-        padding: 20px 100px;  /* ← 左右の余白を大きく */
+        padding: 50px 100px;  /* ← 左右の余白を大きく */
         display: grid;
         grid-template-columns: repeat(4, 1fr); /* 横4つ */
         gap: 30px;  /* ← カードの間隔も少し広げる */
