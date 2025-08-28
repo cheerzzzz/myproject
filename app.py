@@ -79,7 +79,14 @@ def edit(memo_id):
         return redirect(url_for("home"))
 
     return render_template("edit.html", memo=memo)
-    
+
+# --- メモ削除 ---
+@app.route("/delete/<int:memo_id>", methods=["POST"])
+def delete_memo(memo_id):
+    memo = Memo.query.get_or_404(memo_id)
+    db.session.delete(memo)
+    db.session.commit()
+    return redirect(url_for("home"))
 
 # --- アプリ起動 & 初期化 ---
 if __name__ == "__main__":

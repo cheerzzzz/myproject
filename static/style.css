@@ -64,7 +64,7 @@
 
 
 
-/* 新規登録ページ */
+/* 新規・編集・削除ページ */
 html, body {
     margin: 0;
     padding: 0;
@@ -124,19 +124,40 @@ html, body {
     background: transparent;
 }
 
-/* 送信ボタン */
-.btn-submit {
-    margin-top: 30px;
-    padding: 10px 80px;
+/* ボタンを横並びに配置するラッパー */
+.button-group {
+    display: flex;
+    justify-content: flex-end; /* 右寄せ */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* 削除ボタン */
+.btn-delete {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.btn-delete:hover {
+    background: darkred;
+}
+
+/* 更新ボタン */
+.btn-update {
     background: black;
     color: white;
     border: none;
-    cursor: pointer;
+    padding: 10px 20px;
     border-radius: 4px;
+    cursor: pointer;
     font-size: 1rem;
-    float: right;
 }
-.btn-submit:hover {
+.btn-update:hover {
     background: #333;
 }
-/* 新規登録ページ */
+
+/* 新規・編集・削除ページ */

@@ -29,8 +29,16 @@
                 {% endif %}
             </div>
 
-            <button type="submit" class="btn-submit">Update</button>
-        </form>
+                <div class="button-group">
+                    <!-- 削除 -->
+                    <form action="{{ url_for('delete_memo', memo_id=memo.id) }}" method="POST" 
+                        onsubmit="return confirm('本当に削除しますか？');" style="margin:0;">
+                        <button type="submit" class="btn-delete">Delete</button>
+                    </form>
+
+                    <!-- 更新 -->
+                    <button type="submit" form="update-form" class="btn-update">Update</button>
+                </div>
     </div>
 </div>
 {% endblock %}
