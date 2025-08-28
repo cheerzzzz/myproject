@@ -14,10 +14,51 @@
         align-items: center;
         justify-content: center;
         text-align: center;
+        position: relative;
     }
 
-    .top-section h1 {
-        font-size: 1.5rem;
+    /* トップアクションエリア */
+    .top-actions {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        display: flex;
+        gap: 15px;
+    }
+
+    /* 共通ボタンスタイル */
+    .btn {
+        min-width: 150px;
+        text-align: center;
+        border-radius: 4px;
+        cursor: pointer;
+        display: inline-flex;   /* ← inline-block から inline-flex に変更 */
+        align-items: center;    /* ← 縦方向中央揃え */
+        justify-content: center;/* ← 横方向中央揃え */
+        font-size: 15px;
+        padding: 15px 30px;
+        line-height: 1;         /* ← ボタン内の高さを統一 */
+        border: none;           /* ← button のデフォルト枠を消す */
+        text-decoration: none;  /* ← a タグの下線を消す */
+    }
+
+
+    /* 新規登録ボタン */
+    .btn-register {
+        background: #556b2f;   /* オリーブグリーン（くすんだ深緑） */
+        color: white;
+    }
+    .btn-register:hover {
+        background: #a9a77d;   /* くすんだベージュ寄りカーキ */
+    }
+
+    /* ログアウトボタン */
+    .btn-logout {
+        background: #000;
+        color: white;
+    }
+    .btn-logout:hover {
+        background: rgb(68, 67, 67);
     }
 
     .bottom-section {
@@ -26,6 +67,7 @@
         grid-template-columns: repeat(4, 1fr); /* 横4つ */
         gap: 30px;  /* ← カードの間隔も少し広げる */
     }
+
 
     .card {
         display: flex;
@@ -60,8 +102,14 @@
         color: gray;
     }
 
+    .no-memo {
+    text-align: center;       /* 横方向中央 */
+    font-size: 1.2rem;
+    color: #666;
+    grid-column: 1 / -1;      /* グリッドの横幅いっぱい使う */
+    margin-top: 50px;
+    }
 /* トップページ */
-
 
 
 /* 新規・編集・削除ページ */
@@ -124,6 +172,23 @@ html, body {
     background: transparent;
 }
 
+/* 登録ボタン */
+.btn-submit {
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 40px;
+    font-size: 1rem;
+    cursor: pointer;
+
+    /* 右下に寄せる */
+    display: block;
+    margin-left: auto;   /* ← 横方向で右寄せ */
+    margin-top: 20px;    /* 上に少し余白 */
+}
+
+
 /* ボタンを横並びに配置するラッパー */
 .button-group {
     display: flex;
@@ -137,7 +202,7 @@ html, body {
     background: red;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 40px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 1rem;
@@ -151,7 +216,7 @@ html, body {
     background: black;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 40px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 1rem;
@@ -206,3 +271,4 @@ html, body {
     background: #333;
 }
 /* 新規登録・ログインページ */
+
