@@ -1,0 +1,142 @@
+/* トップページ */
+    body{
+      background: #f6f6f6;
+    }
+    .hero-wrapper {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+    }
+
+    .top-section {
+        height: 20vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .top-section h1 {
+        font-size: 1.5rem;
+    }
+
+    .bottom-section {
+        padding: 50px 100px;  /* ← 左右の余白を大きく */
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 横4つ */
+        gap: 30px;  /* ← カードの間隔も少し広げる */
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative; /* 日付を右下に配置するために必要 */
+        padding-bottom: 25px; /* 日付のスペース確保 */
+        height: 400px;
+        box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .card img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .card h3 {
+        margin: 10px;
+        font-size: 1.2rem;
+    }
+
+    .card p {
+        margin: 0 10px 10px;
+        font-size: 0.9rem;
+    }
+
+    .card small {
+        position: absolute;   /* ← カードの右下に固定 */
+        right: 10px;
+        bottom: 5px;
+        font-size: 0.8rem;
+        color: gray;
+    }
+
+/* トップページ */
+
+
+
+/* 新規登録ページ */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+* {
+    box-sizing: border-box;
+}
+
+.register-container {
+    display: flex;
+    flex-direction: column; /* ← 縦並び */
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    background: #f5f3ef;
+    padding: 60px 20px;
+}
+
+/* タイトル */
+.register-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 100px;
+    text-align: center;
+}
+
+/* フォーム */
+.form-wrapper {
+    width: 100%;
+    max-width: 600px; /* 中央に寄せるため最大幅を設定 */
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 8px 0;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding: 8px 0;
+    background: transparent;
+}
+
+/* 送信ボタン */
+.btn-submit {
+    margin-top: 30px;
+    padding: 10px 80px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+    float: right;
+}
+.btn-submit:hover {
+    background: #333;
+}
+/* 新規登録ページ */

@@ -3,71 +3,6 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<style>
-
-    .hero-wrapper {
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-    }
-
-    .top-section {
-        height: 20vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #f5f3ef;
-        text-align: center;
-    }
-
-    .top-section h1 {
-        font-size: 2.5rem;
-        font-weight: bold;
-    }
-
-    .bottom-section {
-      height: 80vh;
-        padding: 20px 100px;  /* ← 左右の余白を大きく */
-        display: grid;
-        grid-template-columns: repeat(4, 1fr); /* 横4つ */
-        gap: 30px;  /* ← カードの間隔も少し広げる */
-        background: #f5f3ef;
-    }
-
-    .card {
-        display: flex;
-        flex-direction: column;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        background: #fff;
-        overflow: hidden;
-        position: relative; /* 日付を右下に配置するために必要 */
-        padding-bottom: 25px; /* 日付のスペース確保 */
-        height: 500px;
-    }
-
-    .card img {
-        width: 100%;
-        object-fit: cover;
-    }
-
-    .card h3 {
-        margin: 10px;
-        font-size: 1.2rem;
-    }
-
-    .card p {
-        margin: 0 10px 10px;
-        font-size: 0.9rem;
-    }
-
-    .card small {
-        position: absolute;   /* ← カードの右下に固定 */
-        right: 10px;
-        bottom: 5px;
-        font-size: 0.8rem;
-        color: gray;
-    }
-</style>
 
 <div class="hero-wrapper">
 <div class="top-section">
@@ -77,10 +12,29 @@
 <div class="bottom-section">
     {% if memos %}
         {% for memo in memos %}
+          {# インデックスで高さを決定 #}
+          {% set mod = loop.index0 % 4 %}
+          {% if mod == 0 %}
+            {% set img_height = 300 %}
+          {% elif mod == 1 %}
+            {% set img_height = 250 %}
+          {% elif mod == 2 %}
+            {% set img_height = 200 %}
+          {% else %}
+            {% set img_height = 350 %}
+          {% endif %}
+
           <div class="card">
             {% if memo.image %}
-              <img src="{{ memo.image }}" alt="memo image" style="height: {{ memo.height }}px;">
+              <img src="{{ memo.image }}" 
+                   alt="memo image"
+                   style="height: {{ img_height }}px; object-fit: cover;">
+            {% else %}
+              <img src="https://i.postimg.cc/cCbHHdpW/landscape-5544380-1280.jpg" 
+                   alt="default image"
+                   style="height: {{ img_height }}px; object-fit: cover;">
             {% endif %}
+
             <h3>{{ memo.title }}</h3>
             <p>{{ memo.content }}</p>
             <small>{{ memo.created_at.strftime('%Y-%m-%d') }}</small>
@@ -90,5 +44,6 @@
         <p>メモが登録されていません</p>
     {% endif %}
 </div>
+
 </div>
 {% endblock %}
