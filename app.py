@@ -9,14 +9,14 @@ app = Flask(__name__)
 app.secret_key = "your_secret_key"  # セッション管理用の秘密鍵（任意の文字列）
 
 # --- DB接続設定 ---
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:sxax0308x@localhost/memoapp"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///memoapp.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-db = SQLAlchemy(app)
+db = SQLAlchemy(app)   # ★ここを忘れない！
 
 # --- Flask-Login & Bcrypt 初期化 ---
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
-login_manager.login_view = "login"  # 未ログイン時に飛ばすページ
+login_manager.login_view = "login"  # 未ログイン時にログインページへ飛ばす
 
 # --- アップロード設定 ---
 UPLOAD_FOLDER = "static/uploads"
@@ -131,7 +131,7 @@ def login():
     return render_template("login.html")
 
 # --- ログアウト ---
-@app.route("/logout", methods=["GET", "POST"])
+@app.route("/logout", methods=["POST"])
 @login_required
 def logout():
     logout_user()
