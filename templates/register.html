@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}新規登録{% endblock %}
+{% block title %}Register{% endblock %}
 
 {% block content %}
 <style>
@@ -15,68 +15,28 @@ html, body {
 
 .register-container {
     display: flex;
-    height: 100vh; /* 画面全体の高さに合わせる */
-}
-
-/* 左エリア */
-.left-section {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    background: #f5f3ef;
-    margin: 50px 0;
-}
-
-.left-top {
-    display: flex;
-    align-items: flex-end;   /* ← 下に寄せる */
-    justify-content: center; /* ← 横は中央 */
-    font-size: 7rem;
-}
-
-.left-bottom {
-    display: flex;
+    flex-direction: column; /* ← 縦並び */
     align-items: center;
-    justify-content: center;
-}
-
-.left-bottom img {
-    width: 85%;  /* 画像サイズで余白をコントロール */
-    height: auto;
-    object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    margin-top: 30px;
-}
-
-/* 右エリア */
-.right-section {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    background: #f5f3ef;
-}
-
-/* 上エリア（30%） */
-.right-top {
-    flex: 0 0 25%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #555;
-}
-
-/* 下エリア（70%） */
-.right-bottom {
-    flex: 0 0 75%;
-    padding: 40px 60px;
-    display: flex;
-    flex-direction: column;
     justify-content: flex-start;
+    min-height: 100vh;
+    background: #f5f3ef;
+    padding: 60px 20px;
+}
+
+/* タイトル */
+.register-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 100px;
+    text-align: center;
 }
 
 /* フォーム */
+.form-wrapper {
+    width: 100%;
+    max-width: 600px; /* 中央に寄せるため最大幅を設定 */
+}
+
 .form-group {
     margin-bottom: 25px;
 }
@@ -103,62 +63,49 @@ html, body {
     background: transparent;
 }
 
+/* 送信ボタン */
 .btn-submit {
     margin-top: 30px;
-    align-self: flex-end;
-    padding: 10px 20px;
+    padding: 10px 80px;
     background: black;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 4px;
     font-size: 1rem;
+    float: right;
 }
 .btn-submit:hover {
     background: #333;
 }
-
 </style>
 
 <div class="register-container">
-    <!-- 左側 -->
-    <div class="left-section">
-        <div class="left-top">
-            Register
-        </div>
-        <div class="left-bottom">
-            <img src="https://i.postimg.cc/cCbHHdpW/landscape-5544380-1280.jpg" alt="register image">
-        </div>
-    </div>
+    <div class="register-title">Register</div>
 
-    <!-- 右側 -->
-    <div class="right-section">
-        <div class="right-top"></div>
+    <div class="form-wrapper">
+        <form method="POST" action="/register" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <hr>
+                <input type="text" id="title" name="title" required>
+            </div>
 
-        <div class="right-bottom">
-            <form method="POST" action="/register">
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <hr>
-                    <input type="text" id="title" name="title" required>
-                </div>
+            <div class="form-group">
+                <label for="content">Content</label>
+                <hr>
+                <textarea id="content" name="content" rows="4" required></textarea>
+            </div>
 
-                <div class="form-group">
-                    <label for="content">Content</label>
-                    <hr>
-                    <textarea id="content" name="content" rows="4" required></textarea>
-                </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <hr>
+                <input type="file" id="image" name="image" accept="image/*">
+            </div>
 
-              <form method="POST" action="/register" enctype="multipart/form-data">
-                  <div class="form-group">
-                      <label for="image">Image</label>
-                      <hr>
-                      <input type="file" id="image" name="image" accept="image/*">
-                  </div>
-
-                <button type="submit" class="btn-submit">Submit</button>
-            </form>
-        </div>
+            <button type="submit" class="btn-submit">登録</button>
+        </form>
     </div>
 </div>
 {% endblock %}
+
