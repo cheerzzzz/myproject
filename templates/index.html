@@ -12,20 +12,29 @@
 <div class="bottom-section">
     {% if memos %}
         {% for memo in memos %}
+          {# インデックスで高さを決定 #}
+          {% set mod = loop.index0 % 4 %}
+          {% if mod == 0 %}
+            {% set img_height = 300 %}
+          {% elif mod == 1 %}
+            {% set img_height = 250 %}
+          {% elif mod == 2 %}
+            {% set img_height = 200 %}
+          {% else %}
+            {% set img_height = 350 %}
+          {% endif %}
+
           <div class="card">
             {% if memo.image %}
               <img src="{{ memo.image }}" 
                    alt="memo image"
-                   style="
-                     {% set mod = loop.index0 % 4 %}
-                     {% if mod == 0 %}height: 300px;
-                     {% elif mod == 1 %}height: 250px;
-                     {% elif mod == 2 %}height: 200px;
-                     {% elif mod == 3 %}height: 350px;
-                     {% endif %}
-                     object-fit: cover;
-                   ">
+                   style="height: {{ img_height }}px; object-fit: cover;">
+            {% else %}
+              <img src="https://i.postimg.cc/cCbHHdpW/landscape-5544380-1280.jpg" 
+                   alt="default image"
+                   style="height: {{ img_height }}px; object-fit: cover;">
             {% endif %}
+
             <h3>{{ memo.title }}</h3>
             <p>{{ memo.content }}</p>
             <small>{{ memo.created_at.strftime('%Y-%m-%d') }}</small>
