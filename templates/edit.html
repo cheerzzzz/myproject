@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Edit{% endblock %}
+
+{% block content %}
+<div class="register-container">
+    <div class="register-title">Edit</div>
+
+    <div class="form-wrapper">
+        <form method="POST" action="/edit/{{ memo.id }}" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <hr>
+                <input type="text" id="title" name="title" value="{{ memo.title }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="content">Content</label>
+                <hr>
+                <textarea id="content" name="content" rows="4" required>{{ memo.content }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image (upload new to replace)</label>
+                <hr>
+                <input type="file" id="image" name="image" accept="image/*">
+                {% if memo.image %}
+                  <p> <img src="{{ memo.image }}" alt="current image" style="max-height:300px;"></p>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn-submit">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
