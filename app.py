@@ -58,6 +58,29 @@ def register():
 
     return render_template("register.html")
 
+
+# --- 編集ページ ---
+@app.route("/edit/<int:memo_id>", methods=["GET", "POST"])
+def edit(memo_id):
+    memo = Memo.query.get_or_404(memo_id)
+
+    if request.method == "POST":
+        memo.title = request.form["title"]
+        memo.content = request.form["content"]
+
+        # 画像の更新（空なら現状維持）
+        file = request.files.get("image")
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+            memo.image = f"/static/uploads/{filename}"
+
+        db.session.commit()
+        return redirect(url_for("home"))
+
+    return render_template("edit.html", memo=memo)
+    
+
 # --- アプリ起動 & 初期化 ---
 if __name__ == "__main__":
     with app.app_context():
