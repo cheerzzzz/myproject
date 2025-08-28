@@ -7,7 +7,8 @@
     <div class="register-title">Edit</div>
 
     <div class="form-wrapper">
-        <form method="POST" action="/edit/{{ memo.id }}" enctype="multipart/form-data">
+        <!-- 更新フォーム -->
+        <form id="update-form" method="POST" action="/edit/{{ memo.id }}" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">Title</label>
                 <hr>
@@ -25,20 +26,23 @@
                 <hr>
                 <input type="file" id="image" name="image" accept="image/*">
                 {% if memo.image %}
-                  <p> <img src="{{ memo.image }}" alt="current image" style="max-height:300px;"></p>
+                  <p><img src="{{ memo.image }}" alt="current image" style="max-height:300px;"></p>
                 {% endif %}
             </div>
+        </form>  <!-- 更新フォームを閉じる -->
 
-                <div class="button-group">
-                    <!-- 削除 -->
-                    <form action="{{ url_for('delete_memo', memo_id=memo.id) }}" method="POST" 
-                        onsubmit="return confirm('本当に削除しますか？');" style="margin:0;">
-                        <button type="submit" class="btn-delete">Delete</button>
-                    </form>
+        <!-- ボタン横並びエリア -->
+        <div class="button-group">
+            <!-- 削除フォーム -->
+            <form action="{{ url_for('delete_memo', memo_id=memo.id) }}" method="POST" 
+                  onsubmit="return confirm('本当に削除しますか？');" style="margin:0;">
+                <button type="submit" class="btn-delete">Delete</button>
+            </form>
 
-                    <!-- 更新 -->
-                    <button type="submit" form="update-form" class="btn-update">Update</button>
-                </div>
+            <!-- 更新ボタン -->
+            <button type="submit" form="update-form" class="btn-update">Update</button>
+        </div>
     </div>
 </div>
 {% endblock %}
+
