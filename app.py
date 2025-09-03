@@ -30,8 +30,8 @@ def allowed_file(filename):
 # --- モデル定義 ---
 class Memo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
-    content = db.Column(db.Text, nullable=False)
+    title = db.Column(db.String(30), nullable=False)   # タイトル30文字
+    content = db.Column(db.Text, nullable=False)       # 詳細は無制限
     image = db.Column(db.String(300))
     created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
 
@@ -56,8 +56,14 @@ def home():
 @login_required
 def register():
     if request.method == "POST":
-        title = request.form["title"]
-        content = request.form["content"]
+        title = request.form["title"].strip()
+        content = request.form["content"].strip()
+
+        # ✅ バリデーション
+        if len(title) > 30:
+            return "タイトルは30文字以内にしてください"
+        if len(content) > 300:
+            return "詳細は300文字以内にしてください"
 
         file = request.files.get("image")
         image_path = None

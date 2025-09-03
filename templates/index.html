@@ -3,56 +3,39 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-
 <div class="hero-wrapper">
-<div class="top-section">
+  <div class="top-section">
     <div class="top-actions">
-        <a href="{{ url_for('register') }}" class="btn btn-register">+ New Memo</a>
+      <a href="{{ url_for('register') }}" class="btn btn-register">+ New Memo</a>
 
-        {% if current_user.is_authenticated %}
-          <form action="{{ url_for('logout') }}" method="POST" class="logout-form">
-            <button type="submit" class="btn btn-logout">Logout</button>
-          </form>
-        {% endif %}
+      {% if current_user.is_authenticated %}
+        <form action="{{ url_for('logout') }}" method="POST" class="logout-form">
+          <button type="submit" class="btn btn-logout">Logout</button>
+        </form>
+      {% endif %}
     </div>
-</div>
+  </div>
 
   <div class="bottom-section">
-      {% if memos %}
-          {% for memo in memos %}
-            {# インデックスで高さを決定 #}
-            {% set mod = loop.index0 % 4 %}
-            {% if mod == 0 %}
-              {% set img_height = 300 %}
-            {% elif mod == 1 %}
-              {% set img_height = 250 %}
-            {% elif mod == 2 %}
-              {% set img_height = 200 %}
-            {% else %}
-              {% set img_height = 350 %}
-            {% endif %}
-
-            <div class="card">
-              <a href="{{ url_for('edit', memo_id=memo.id) }}" style="text-decoration: none; color: inherit;">
-                {% if memo.image %}
-                  <img src="{{ memo.image }}" 
-                       alt="memo image"
-                       style="height: {{ img_height }}px; object-fit: cover;">
-                {% else %}
-                  <img src="https://i.postimg.cc/cCbHHdpW/landscape-5544380-1280.jpg" 
-                       alt="default image"
-                       style="height: {{ img_height }}px; object-fit: cover;">
-                {% endif %}
-
-                <h3>{{ memo.title }}</h3>
-                <p>{{ memo.content }}</p>
-                <small>{{ memo.created_at.strftime('%Y-%m-%d') }}</small>
-              </a>
-            </div>
-          {% endfor %}
-      {% else %}
-          <p class="no-memo">Memo App<br>メモが登録されていません</p>
-      {% endif %}
+    {% if memos %}
+      {% for memo in memos %}
+        <div class="card">
+          <a href="{{ url_for('edit', memo_id=memo.id) }}" style="text-decoration: none; color: inherit;">
+            <img src="{{ memo.image or 'https://i.postimg.cc/cCbHHdpW/landscape-5544380-1280.jpg' }}"
+                 alt="memo image">
+            <h3>
+              {{ memo.title[:30] }}{% if memo.title|length > 30 %}...{% endif %}
+            </h3>
+              <p>
+                {{ memo.content[:100] }}{% if memo.content|length > 100 %}...{% endif %}
+              </p>
+            <small>{{ memo.created_at.strftime('%Y-%m-%d') }}</small>
+          </a>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="no-memo">Memo App<br>メモが登録されていません</p>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
