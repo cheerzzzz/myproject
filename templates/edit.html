@@ -32,18 +32,26 @@
                          style="max-height:300px;">
                 </p>
             </div>
+
+            <div class="form-group important">
+            <span class="important-label">important</span>
+            <input type="checkbox" id="important" name="important" value="1">
+            </div>
+
         </form>  <!-- 更新フォームを閉じる -->
 
         <!-- ボタン横並びエリア -->
         <div class="button-group">
-            <!-- 更新ボタン -->
-            <button type="submit" form="update-form" class="btn-update">Update</button>
 
-            <!-- 削除フォーム -->
+        <!-- 削除フォーム -->
             <form action="{{ url_for('delete_memo', memo_id=memo.id) }}" method="POST" 
                   onsubmit="return confirm('本当に削除しますか？');" style="margin:0;">
                 <button type="submit" class="btn-delete">Delete</button>
             </form>
+
+            <!-- 更新ボタン -->
+            <button type="submit" form="update-form" class="btn-update">Update</button>
+
         </div>
     </div>
 </div>

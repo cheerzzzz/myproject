@@ -30,9 +30,10 @@ def allowed_file(filename):
 # --- モデル定義 ---
 class Memo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(30), nullable=False)   # タイトル30文字
-    content = db.Column(db.Text, nullable=False)       # 詳細は無制限
+    title = db.Column(db.String(30), nullable=False)
+    content = db.Column(db.Text, nullable=False)
     image = db.Column(db.String(300))
+    important = db.Column(db.Boolean, default=False)  # ★重要フラグを追加
     created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
 
 class User(db.Model, UserMixin):
@@ -62,8 +63,9 @@ def register():
         # ✅ バリデーション
         if len(title) > 30:
             return "タイトルは30文字以内にしてください"
-        if len(content) > 300:
-            return "詳細は300文字以内にしてください"
+
+        # ✅ 重要チェックボックスの値を受け取る
+        important = "important" in request.form  # チェックされていたら True
 
         file = request.files.get("image")
         image_path = None
@@ -72,7 +74,8 @@ def register():
             file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
             image_path = f"/static/uploads/{filename}"
 
-        new_memo = Memo(title=title, content=content, image=image_path)
+        # ✅ Memo に important を渡す
+        new_memo = Memo(title=title, content=content, image=image_path, important=important)
         db.session.add(new_memo)
         db.session.commit()
         return redirect(url_for("home"))
