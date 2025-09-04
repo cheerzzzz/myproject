@@ -379,6 +379,23 @@ html, body {
     padding-bottom: 5px;
 }
 
+.profile-card input[type="email"] {
+    width: 100%;
+    max-width: 400px;   /* 入力欄の最大幅 */
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.profile-card input[type="email"]:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
 /* アクションボタン群 */
 .profile-actions {
     display: flex;

@@ -187,6 +187,22 @@ def forgot_password():
         return "パスワードリセット手順をメールで送信しました"
     return render_template("forgot_password.html")
 
+# --- メールアドレス更新 ---
+@app.route("/update-email", methods=["POST"])
+@login_required
+def update_email():
+    new_email = request.form["new_email"].strip()
+
+    # すでに同じメールが存在していないか確認
+    existing = User.query.filter_by(email=new_email).first()
+    if existing:
+        return "This email is already in use."
+
+    current_user.email = new_email
+    db.session.commit()
+    return redirect(url_for("profile"))
+
+
 
 # --- アプリ起動 & 初期化 ---
 if __name__ == "__main__":

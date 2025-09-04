@@ -9,7 +9,12 @@
   <!-- ユーザー情報 -->
   <div class="profile-card">
     <p><strong>User ID:</strong> {{ user.id }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>  <!-- ✅ メールアドレスを表示 -->
+
+    <!-- ✅ メールアドレス編集フォーム -->
+    <form method="POST" action="{{ url_for('update_email') }}">
+      <label for="email"><strong>Email:</strong></label>
+      <input type="email" id="email" name="new_email" value="{{ user.email }}" required>
+    </form>
   </div>
 
   <!-- アクションボタン群 -->
@@ -19,3 +24,4 @@
   </div>
 </div>
 {% endblock %}
+
