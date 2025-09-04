@@ -20,17 +20,21 @@
   </div>
 
   <div class="bottom-section">
-    {% for memo in memos %}
-      <div class="card {% if memo.important %}important{% endif %}" data-id="{{ memo.id }}">
-        <!-- ✅ カード全体をリンクにする -->
-        <a href="{{ url_for('edit', memo_id=memo.id) }}" style="text-decoration: none; color: inherit;">
-          <img src="{{ memo.image or 'https://i.postimg.cc/cCbHHdpW/landscape-5544380-1280.jpg' }}" alt="memo image">
-          <h3>{{ memo.title[:30] }}{% if memo.title|length > 30 %}...{% endif %}</h3>
-          <p>{{ memo.content[:100] }}{% if memo.content|length > 100 %}...{% endif %}</p>
-          <small>{{ memo.created_at.strftime('%Y-%m-%d') }}</small>
-        </a>
-      </div>
-    {% endfor %}
+    {% if memos %}
+      {% for memo in memos %}
+        <div class="card {% if memo.important %}important{% endif %}" data-id="{{ memo.id }}">
+          <!-- ✅ カード全体をリンクにする -->
+          <a href="{{ url_for('edit', memo_id=memo.id) }}" style="text-decoration: none; color: inherit;">
+            <img src="{{ memo.image or 'https://i.postimg.cc/cCbHHdpW/landscape-5544380-1280.jpg' }}" alt="memo image">
+            <h3>{{ memo.title[:30] }}{% if memo.title|length > 30 %}...{% endif %}</h3>
+            <p>{{ memo.content[:100] }}{% if memo.content|length > 100 %}...{% endif %}</p>
+            <small>{{ memo.created_at.strftime('%Y-%m-%d') }}</small>
+          </a>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="no-memo">Memo App<br>メモの投稿はありません</p>
+    {% endif %}
   </div>
 </div>
 

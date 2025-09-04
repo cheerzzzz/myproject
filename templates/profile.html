@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Account Details{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+  <h2>Account Details</h2>
+
+  <!-- ユーザー情報 -->
+  <div class="profile-card">
+    <p><strong>User ID:</strong> {{ user.id }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>  <!-- ✅ メールアドレスを表示 -->
+  </div>
+
+  <!-- アクションボタン群 -->
+  <div class="profile-actions">
+    <a href="{{ url_for('change_password') }}" class="btn btn-update">Change Password</a>
+    <a href="{{ url_for('home') }}" class="btn btn-back">Back to Home</a>
+  </div>
+</div>
+{% endblock %}
