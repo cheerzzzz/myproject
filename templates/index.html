@@ -9,6 +9,9 @@
       <a href="{{ url_for('register') }}" class="btn btn-register">+ New Memo</a>
 
       {% if current_user.is_authenticated %}
+        <!-- ✅ アカウント管理ボタン -->
+        <a href="{{ url_for('profile') }}" class="btn btn-profile">Account</a>
+
         <form action="{{ url_for('logout') }}" method="POST" class="logout-form">
           <button type="submit" class="btn btn-logout">Logout</button>
         </form>

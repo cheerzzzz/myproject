@@ -153,6 +153,13 @@ def logout():
     logout_user()
     return redirect(url_for("login"))
 
+# --- アカウント管理ページ ---
+@app.route("/profile")
+@login_required
+def profile():
+    return render_template("profile.html", user=current_user)
+    
+
 # --- アプリ起動 & 初期化 ---
 if __name__ == "__main__":
     with app.app_context():
