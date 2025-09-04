@@ -245,6 +245,26 @@ html, body {
     margin-top: 20px;
 }
 
+/* 認証系ページ専用ボタン */
+.btn-auth {
+  width: 100% !important;   /* ← 強制的に親幅いっぱい */
+  height: 50px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-auth:hover {
+  background: #333;
+}
+
 /* 削除ボタン */
 .btn-delete {
     background: red;
@@ -302,7 +322,7 @@ html, body {
 }
 
 .auth-box h2 {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     text-align: center;
 }
 
@@ -333,3 +353,52 @@ html, body {
 }
 /* 新規登録・ログインページ */
 
+/* プロフィールページ */
+.profile-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.profile-container h2 {
+    text-align: center;
+    margin-bottom: 70px;
+    font-size: 2rem;
+}
+
+.profile-card {
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+.profile-card p {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* アクションボタン群 */
+.profile-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: flex-end; /* ← 横方向を右寄せ */
+}
+/* Back ボタン */
+.btn-back {
+    background: #3498db;
+    color: #fff;
+    width: 180px;
+    height: 50px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+.btn-back:hover {
+    background: #2980b9;
+}
+/* プロフィールページ */

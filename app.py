@@ -158,7 +158,25 @@ def logout():
 @login_required
 def profile():
     return render_template("profile.html", user=current_user)
-    
+
+# --- パスワード変更ページ ---
+@app.route("/change-password", methods=["GET", "POST"])
+@login_required
+def change_password():
+    if request.method == "POST":
+        current_pw = request.form["current_password"]
+        new_pw = request.form["new_password"]
+
+        # 現在のパスワードが正しいか確認
+        if bcrypt.check_password_hash(current_user.password, current_pw):
+            hashed_pw = bcrypt.generate_password_hash(new_pw).decode("utf-8")
+            current_user.password = hashed_pw
+            db.session.commit()
+            return redirect(url_for("profile"))
+        else:
+            return "Current password is incorrect"
+
+    return render_template("change_password.html")
 
 # --- アプリ起動 & 初期化 ---
 if __name__ == "__main__":
