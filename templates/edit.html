@@ -35,7 +35,8 @@
 
             <div class="form-group important">
             <span class="important-label">important</span>
-            <input type="checkbox" id="important" name="important" value="1">
+            <input type="checkbox" id="important" name="important" value="1"
+                    {% if memo.important %}checked{% endif %}>
             </div>
 
         </form>  <!-- 更新フォームを閉じる -->

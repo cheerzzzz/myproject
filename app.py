@@ -91,6 +91,9 @@ def edit(memo_id):
         memo.title = request.form["title"]
         memo.content = request.form["content"]
 
+        # ✅ 重要チェックの値を保存
+        memo.important = "important" in request.form
+
         file = request.files.get("image")
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
