@@ -38,7 +38,7 @@ class Memo(db.Model):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True, nullable=False)
+    email = db.Column(db.String(200), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
 
 @login_manager.user_loader
@@ -117,33 +117,33 @@ def delete_memo(memo_id):
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
-        username = request.form["username"]
+        email = request.form["email"]       # ✅ username ではなく email
         password = request.form["password"]
+
         hashed_pw = bcrypt.generate_password_hash(password).decode("utf-8")
 
-        new_user = User(username=username, password=hashed_pw)
+        new_user = User(email=email, password=hashed_pw)  # ✅ username は使わない
         db.session.add(new_user)
         db.session.commit()
 
-        # 👇 登録後にログインしてしまう
         login_user(new_user)
-
         return redirect(url_for("home"))
+
     return render_template("signup.html")
 
 # --- ログイン ---
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        username = request.form["username"]
+        email = request.form["email"]      # ✅ username から email に変更
         password = request.form["password"]
 
-        user = User.query.filter_by(username=username).first()
+        user = User.query.filter_by(email=email).first()  # ✅ email で検索
         if user and bcrypt.check_password_hash(user.password, password):
             login_user(user)
             return redirect(url_for("home"))
         else:
-            return "Invalid username or password"
+            return "Invalid email or password"  # ✅ メッセージも修正
     return render_template("login.html")
 
 # --- ログアウト ---
@@ -177,6 +177,16 @@ def change_password():
             return "Current password is incorrect"
 
     return render_template("change_password.html")
+
+# --- パスワードを忘れた場合のページ ---
+@app.route("/forgot-password", methods=["GET", "POST"])
+def forgot_password():
+    if request.method == "POST":
+        email = request.form["email"]
+        # TODO: パスワードリセット処理（メール送信など）
+        return "パスワードリセット手順をメールで送信しました"
+    return render_template("forgot_password.html")
+
 
 # --- アプリ起動 & 初期化 ---
 if __name__ == "__main__":

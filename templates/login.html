@@ -7,13 +7,21 @@
     <div class="auth-box">
         <h2>Login</h2>
         <form method="POST" action="/login">
-            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit" class="btn btn-auth">Login</button>
         </form>
-          <p style="text-align:center; margin-top:20px;">
-              アカウントをお持ちでない方は<a href="{{ url_for('signup') }}">こちらから新規登録</a>
-          </p>
+
+        <!-- 新規登録へのリンク -->
+        <p style="text-align:center; margin-top:20px;">
+            アカウントをお持ちでない方は
+            <a href="{{ url_for('signup') }}">こちらから新規登録</a>
+        </p>
+
+        <!-- ✅ パスワードを忘れた場合のリンク -->
+        <p style="text-align:center; margin-top:10px;">
+            <a href="{{ url_for('forgot_password') }}">パスワードをお忘れの方はこちら</a>
+        </p>
     </div>
 </div>
 {% endblock %}

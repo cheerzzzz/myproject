@@ -9,9 +9,7 @@
   <!-- ユーザー情報 -->
   <div class="profile-card">
     <p><strong>User ID:</strong> {{ user.id }}</p>
-    <p><strong>Username:</strong> {{ user.username }}</p>
-    <!-- もしメールアドレスを User モデルに追加してたら -->
-    {# <p><strong>Email:</strong> {{ user.email }}</p> #}
+    <p><strong>Email:</strong> {{ user.email }}</p>  <!-- ✅ メールアドレスを表示 -->
   </div>
 
   <!-- アクションボタン群 -->
